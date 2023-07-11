@@ -1,11 +1,11 @@
-.footer__copyright {
-  color: #545454;
-  font-size: 18px;
-  line-height: 1;
+.footer {
   max-width: 880px;
   display: grid;
   justify-content: center;
   grid-template-areas: "copyright";
   grid-template-columns: minmax(auto, 320px) auto;
   margin-bottom: 60px;
+  color: #545454;
+  font-size: 18px;
+  line-height: 1;
 }
