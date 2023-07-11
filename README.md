@@ -20,6 +20,4 @@ This is a webpage deisgn for a person who has traveled across the world to diffe
 I used the images provided to me in a separate folder and imported them to the webpage.
 Images consisted of different outdoor parks and some national parks.
 
-The way you'll do this at work is by exporting images directly from Figma — we recommend doing that to practice more. Don't forget to optimize them [here](https://tinypng.com/), so your project loads faster.
-
-Good luck and have fun!
+I also downloaded icons and special characters needed from the Figma content provided.
