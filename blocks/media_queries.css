@@ -55,9 +55,25 @@
     margin: 0 20px;
     max-width: calc(100% - 40px);
   }
+
+  .copyright {
+    margin: 0 20px;
+    max-width: calc(100% - 40px);
+  }
 }
 
 @media screen and (max-width: 775px) {
+  .profile {
+    display: flex;
+    justify-content: center;
+    margin: 0 20px;
+    max-width: calc(100% - 40px);
+  }
+
+  .profile__info {
+    flex-wrap: wrap;
+  }
+
   .profile__title {
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -68,5 +84,10 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+  }
+
+  .footer__copyright {
+    max-width: calc(100% - 40px);
+    margin-bottom: 30px;
   }
 }
