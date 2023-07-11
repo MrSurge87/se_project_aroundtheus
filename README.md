@@ -5,6 +5,8 @@
 - Intro
 - Figma
 - Images
+- Functionality
+- Github Pages Link
 
 **Intro**
 
@@ -21,3 +23,12 @@ I used the images provided to me in a separate folder and imported them to the w
 Images consisted of different outdoor parks and some national parks.
 
 I also downloaded icons and special characters needed from the Figma content provided.
+
+**Functionality**
+
+- This webpage uses some media queries to make sure the page layout conforms to different screen sizes.
+- There are hover elements that change the appearance of the add button, edit button, and like icon (heart icon).
+
+**Github Pages Link**
+
+- https://MrSurge87.github.io/se_project_aroundtheus
