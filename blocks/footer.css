@@ -4,8 +4,8 @@
   justify-content: center;
   grid-template-areas: "copyright";
   grid-template-columns: minmax(auto, 320px) auto;
-  margin-bottom: 60px;
   color: #545454;
   font-size: 18px;
   line-height: 1;
+  margin-top: 67px;
 }
