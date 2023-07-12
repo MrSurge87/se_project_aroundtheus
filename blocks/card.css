@@ -1,0 +1,6 @@
+.card {
+  list-style-type: none;
+  display: flex;
+  border-radius: 10px;
+  flex-direction: column;
+}
