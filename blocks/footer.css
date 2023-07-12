@@ -9,3 +9,17 @@
   line-height: 1;
   margin-top: 67px;
 }
+
+@media screen and (max-width: 320px) {
+  .footer {
+    margin: 0 20px;
+    max-width: calc(100% - 40px);
+  }
+}
+
+@media screen and (max-width: 775px) {
+  .footer {
+    max-width: calc(100% - 40px);
+    margin-bottom: 30px;
+  }
+}
