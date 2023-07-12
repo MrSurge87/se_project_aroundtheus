@@ -1,25 +1,19 @@
 .footer {
-  max-width: 880px;
-  display: grid;
-  justify-content: center;
-  grid-template-areas: "copyright";
-  grid-template-columns: minmax(auto, 320px) auto;
-  color: #545454;
+  font-family: "Inter", "Arial", sans-serif;
+  flex-shrink: 0;
+  padding: 35px 0 60px;
+}
+
+.footer__copyright {
   font-size: 18px;
   line-height: 1;
-  margin-top: 67px;
+  color: #545454;
+  margin: 0;
 }
 
 @media screen and (max-width: 320px) {
   .footer {
     margin: 0 20px;
     max-width: calc(100% - 40px);
-  }
-}
-
-@media screen and (max-width: 775px) {
-  .footer {
-    max-width: calc(100% - 40px);
-    margin-bottom: 30px;
   }
 }

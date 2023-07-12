@@ -16,3 +16,14 @@
   min-height: 100vh;
   margin: 0;
 }
+
+@media screen and (max-width: 320px) {
+  .page__section {
+    margin: 0;
+  }
+}
+
+@media screen and (max-width: 775px) {
+  .footer__copyright {
+  }
+}
