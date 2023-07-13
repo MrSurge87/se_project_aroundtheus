@@ -22,8 +22,3 @@
     margin: 0;
   }
 }
-
-@media screen and (max-width: 775px) {
-  .footer__copyright {
-  }
-}

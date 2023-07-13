@@ -11,54 +11,6 @@
   margin: 0;
 }
 
-.card__image {
-  height: 282px;
-  width: 282px;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-}
-
-.card__description {
-  display: flex;
-  background-color: white;
-  color: black;
-  font-family: "Inter", Arial, sans-serif;
-  font-weight: 900;
-  line-height: 29px;
-  padding: 25px 20px;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  white-space: nowrap;
-  margin: 0;
-}
-
-.card__title {
-  max-width: 220px;
-  font-size: 24px;
-  font-family: "Inter", Arial, sans-serif;
-  font-weight: 900;
-  line-height: 1.2;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  margin: 0;
-}
-
-.card__like-button {
-  background: transparent url(../images/Heart\ Icon.svg) center no-repeat;
-  height: 18px;
-  width: 21px;
-  border: none;
-}
-
-.card__like-button:hover {
-  opacity: 0.5;
-  transition: 0.3s;
-  cursor: pointer;
-}
-
 @media screen and (max-width: 320px) {
   .cards {
     margin-top: 36px;
