@@ -27,6 +27,10 @@
   width: 430px;
 }
 
+.modal__form {
+  width: 358px;
+}
+
 .modal__close {
   position: absolute;
   top: -45px;
