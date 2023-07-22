@@ -19,7 +19,7 @@
         <section class="profile page__section">
           <img class="profile__image" src="./images/Avatar.svg" alt="Avatar" />
           <div class="profile__info">
-            <h1 class="profile__title">Jacques Cousteau</h1>
+            <h1 class="profile__title" id="profile__name">Jacques Cousteau</h1>
             <button class="profile__edit-button" type="submit"></button>
             <p class="profile__description">Explorer</p>
           </div>
@@ -99,6 +99,30 @@
       <footer class="footer page__section">
         <p class="footer__copyright">&copy; 2023 Sergio A Mendoza-Gutierrez></p>
       </footer>
+    </div>
+
+    <!-- modal class should have an overlay that goes over the whole page and darkens the background-->
+    <div class="modal">
+      <div class="modal__container">
+        <button class="modal__close"></button>
+        <p class="modal__heading">Edit Profile</p>
+        <form class="modal__form">
+          <!-- make sure you are using the same class name as the previous profile title-->
+          <input
+            class="modal__input"
+            type="text"
+            name="title"
+            placeholder="Profile Name"
+          />
+          <input
+            class="modal__input"
+            type="text"
+            name="description"
+            placeholder="Profile Description"
+          />
+          <button class="modal__button">Save</button>
+        </form>
+      </div>
     </div>
 
     <script src="./scripts/index.js"></script>
