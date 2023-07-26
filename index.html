@@ -25,79 +25,14 @@
               id="profile-edit-button"
               type="submit"
             ></button>
-            <p class="profile__description">Explorer</p>
+            <p class="profile__description" id="profile__description">
+              Explorer
+            </p>
           </div>
           <button class="profile__add-button" type="submit"></button>
         </section>
         <section class="cards page__section">
-          <ul class="cards__list">
-            <li class="card">
-              <img
-                class="card__image"
-                src="./images/yosemite.jpg"
-                alt="Yosemite picture"
-              />
-              <div class="card__description">
-                <h2 class="card__title">Yosemite Valley</h2>
-                <button class="card__like-button" type="submit"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                class="card__image"
-                src="./images/lake-louise.jpg"
-                alt="Lake-Louise picture"
-              />
-              <div class="card__description">
-                <h2 class="card__title">Lake Louise</h2>
-                <button class="card__like-button" type="submit"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                class="card__image"
-                src="./images/bald-mountains.jpg"
-                alt="Bald-Mountains picture"
-              />
-              <div class="card__description">
-                <h2 class="card__title">Bald Mountains</h2>
-                <button class="card__like-button" type="submit"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                class="card__image"
-                src="./images/latemar.jpg"
-                alt="Latemar picture"
-              />
-              <div class="card__description">
-                <h2 class="card__title">Latemar</h2>
-                <button class="card__like-button" type="submit"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                class="card__image"
-                src="./images/vanoise.jpg"
-                alt="Vanoise picture"
-              />
-              <div class="card__description">
-                <h2 class="card__title">Vanoise National Park</h2>
-                <button class="card__like-button" type="submit"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                class="card__image"
-                src="./images/lago.jpg"
-                alt="Lago park picture"
-              />
-              <div class="card__description">
-                <h2 class="card__title">Lago di Braies</h2>
-                <button class="card__like-button" type="submit"></button>
-              </div>
-            </li>
-          </ul>
+          <ul class="cards__list"></ul>
         </section>
       </main>
       <footer class="footer page__section">
@@ -105,29 +40,39 @@
       </footer>
     </div>
 
-    <!-- modal class should have an overlay that goes over the whole page and darkens the background-->
     <div class="modal" id="profile-edit-modal">
       <div class="modal__container">
         <button class="modal__close" id="profile-modal-close"></button>
         <p class="modal__heading">Edit Profile</p>
         <form class="modal__form">
-          <!-- make sure you are using the same class name as the previous profile title-->
           <input
             class="modal__input"
             type="text"
             name="title"
             placeholder="Name"
+            id="modal-input-name"
           />
           <input
             class="modal__input"
             type="text"
             name="description"
             placeholder="Description"
+            id="modal-input-description"
           />
-          <button class="modal__button">Save</button>
+          <button class="modal__button" id="profile-save-button">Save</button>
         </form>
       </div>
     </div>
+
+    <template id="card-template">
+      <li class="card">
+        <img class="card__image" src="" alt="" />
+        <div class="card__description">
+          <h2 class="card__title"></h2>
+          <button class="card__like-button" type="submit"></button>
+        </div>
+      </li>
+    </template>
 
     <script src="./scripts/index.js"></script>
   </body>
