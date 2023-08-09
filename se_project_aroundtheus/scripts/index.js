@@ -44,6 +44,7 @@ const cardTemplate =
 
 const cardListElement = document.querySelector(".cards__list");
 const addNewCardModal = document.querySelector("#add-new-card");
+const addNewCardForm = addNewCardModal.querySelector("#add-card-form");
 const cardTitleInput = addNewCardModal.querySelector(
   ".modal__input_type_title"
 );
@@ -112,7 +113,7 @@ function handleAddCardFormSubmit(event) {
   const name = cardTitleInput.value;
   const link = cardUrlInput.value;
   renderCard({ name, link }, cardListElement);
-  EventTarget.target.reset();
+  addNewCardForm.reset();
   closeModal(addNewCardModal);
 }
 
