@@ -145,6 +145,11 @@ addNewCardClose.addEventListener("click", () => {
   closeModal(addNewCardModal);
 });
 
+/* PREVIEW IMAGE CLOSE*/
+imagePreviewClose.addEventListener("click", () => {
+  closeModal(imagePreviewModal);
+});
+
 /* SUBMITS NEW CARD IMG */
 addNewCardModal.addEventListener("submit", handleAddCardFormSubmit);
 

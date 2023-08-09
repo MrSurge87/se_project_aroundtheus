@@ -4,14 +4,19 @@
   left: 0;
   bottom: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.9);
   z-index: 999;
-  display: none;
-  padding: 0 19px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 0.05s, opacity 0.25s linear;
 }
 
 .modal_opened {
-  display: flex;
+  visibility: visible;
+  opacity: 1;
 }
 
 .modal__container {
@@ -110,26 +115,6 @@
 
 .modal__preview {
   position: relative;
-  margin: auto;
-}
-
-.form__fieldset {
-  border: none;
-}
-
-.modal__preview-close {
-  position: relative;
-  float: right;
-  top: -45px;
-  right: -45px;
-  background-image: url("../images/Close\ Icon.svg");
-  cursor: pointer;
-  border: none;
-  background-color: transparent;
-  height: 40px;
-  width: 40px;
-  background-repeat: no-repeat;
-  background-size: contain;
 }
 
 @media screen and (max-width: 568px) {
