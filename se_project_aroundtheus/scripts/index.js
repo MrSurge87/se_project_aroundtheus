@@ -95,9 +95,6 @@ function getCardElement(data) {
     openModal(imagePreviewModal);
   });
 
-  cardImageElement.src = data.link;
-  cardImageElement.alt = data.name;
-
   return cardElement;
 }
 
@@ -115,6 +112,7 @@ function handleAddCardFormSubmit(event) {
   const name = cardTitleInput.value;
   const link = cardUrlInput.value;
   renderCard({ name, link }, cardListElement);
+  EventTarget.target.reset();
   closeModal(addNewCardModal);
 }
 
