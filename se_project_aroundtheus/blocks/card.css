@@ -1,4 +1,5 @@
 .card {
+  position: relative;
   list-style-type: none;
   display: flex;
   border-radius: 10px;
@@ -47,11 +48,29 @@
   border: none;
 }
 
-.card__like-button-click {
+.card__like-button_active {
   background: transparent url(../images/BlackHeart.svg) center no-repeat;
 }
 
 .card__like-button:hover {
+  opacity: 0.5;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.card__button-delete {
+  margin: 0;
+  cursor: pointer;
+  border: none;
+  background: transparent url(../images/Trash.svg) center no-repeat;
+  position: absolute;
+  width: 18px;
+  height: 19px;
+  top: 18px;
+  right: 15px;
+}
+
+.card__button-delete:hover {
   opacity: 0.5;
   transition: 0.3s;
   cursor: pointer;

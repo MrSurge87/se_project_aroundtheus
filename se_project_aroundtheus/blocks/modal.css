@@ -103,6 +103,35 @@
   opacity: 0.8;
 }
 
+.modal__image-preview {
+  max-height: 75vh;
+  max-width: 75vw;
+}
+
+.modal__preview {
+  position: relative;
+  margin: auto;
+}
+
+.form__fieldset {
+  border: none;
+}
+
+.modal__preview-close {
+  position: relative;
+  float: right;
+  top: -45px;
+  right: -45px;
+  background-image: url("../images/Close\ Icon.svg");
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  height: 40px;
+  width: 40px;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
 @media screen and (max-width: 568px) {
   .modal__container {
     max-width: 238px;
@@ -120,9 +149,6 @@
 
   .modal__button {
     height: 46px;
-  }
-
-  .modal__input {
   }
 }
 

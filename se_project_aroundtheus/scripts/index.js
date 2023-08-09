@@ -48,8 +48,12 @@ const cardTitleInput = addNewCardModal.querySelector(
   ".modal__input_type_title"
 );
 const cardUrlInput = addNewCardModal.querySelector(".modal__input_type_url");
-const likeButton = cardTemplate.querySelector(".card__like-button");
-
+const imagePreviewModal = document.querySelector("#preview-image-modal");
+const imagePreview = imagePreviewModal.querySelector(".modal__image-preview");
+const imagePreviewTitle = imagePreviewModal.querySelector(
+  ".modal__image-preview-title"
+);
+const imagePreviewClose = imagePreviewModal.querySelector(".modal__close");
 /* FUNCTIONS */
 
 function closeModal(modal) {
@@ -69,9 +73,30 @@ function getCardElement(data) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImageElement = cardElement.querySelector(".card__image");
   const cardTitleElement = cardElement.querySelector(".card__title");
+  const likeButton = cardElement.querySelector(".card__like-button");
+  const deleteButton = cardElement.querySelector(".card__button-delete");
+
   cardImageElement.setAttribute("src", data.link);
   cardImageElement.setAttribute("alt", data.name);
   cardTitleElement.textContent = data.name;
+
+  likeButton.addEventListener("click", () => {
+    likeButton.classList.toggle("card__like-button_active");
+  });
+
+  deleteButton.addEventListener("click", () => {
+    cardElement.remove();
+  });
+
+  cardImageElement.addEventListener("click", () => {
+    imagePreview.src = data.link;
+    imagePreview.alt = `Preview of ${data.name}`;
+    imagePreviewTitle.textContent = data.name;
+    openModal(imagePreviewModal);
+  });
+
+  cardImageElement.src = data.link;
+  cardImageElement.alt = data.name;
 
   return cardElement;
 }
@@ -122,11 +147,6 @@ addNewCardClose.addEventListener("click", () => {
 
 /* SUBMITS NEW CARD IMG */
 addNewCardModal.addEventListener("submit", handleAddCardFormSubmit);
-
-/* LIKE BUTTON*/
-likeButton.addEventListener("click", () => {
-  likeButton.classList.toggle("card__like-button_active");
-});
 
 /* CARDS FOR EACH */
 initialCards.forEach((cardData) => renderCard(cardData, cardListElement));
