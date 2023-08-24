@@ -87,6 +87,24 @@
   margin-top: 30px;
 }
 
+.modal__input:valid {
+  border-bottom: 1px solid green;
+}
+.modal__input:invalid {
+  border-bottom: 1px solid #f00;
+}
+
+.modal__error_visible {
+  position: absolute;
+  margin-left: 36px;
+  color: #f00;
+  font-family: "Inter";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
 .modal__button {
   font-family: "Inter", Arial, sans-serif;
   font-weight: 400;
@@ -106,6 +124,10 @@
 .modal__button:hover {
   transition: linear 0.3s;
   opacity: 0.8;
+}
+
+.modal__button_disabled {
+  opacity: 0.2;
 }
 
 .modal__image-preview {
