@@ -74,12 +74,7 @@ function closeModalEscape(evt) {
   }
 }
 
-[
-  profileEditModal,
-  addNewCardModal,
-  profileModalForm,
-  imagePreviewModal,
-].forEach((modal) => {
+[profileEditModal, addNewCardModal, imagePreviewModal].forEach((modal) => {
   modal.addEventListener("click", (evt) => {
     if (
       evt.target.classList.contains("modal") ||
@@ -151,27 +146,12 @@ profileEditButton.addEventListener("click", () => {
   openModal(profileEditModal);
 });
 
-/* CLOSES EDIT PROFILE POPUP */
-profileEditClose.addEventListener("click", () => {
-  closeModal(profileEditModal);
-});
-
 /* SAVES NAME CHANGE AND DESRIPTION */
 profileModalForm.addEventListener("submit", handleProfileFormSubmit);
 
 /* OPENS POPUP TO ADD NEW IMG */
 addNewCardButton.addEventListener("click", () => {
   openModal(addNewCardModal);
-});
-
-/* NEW CARD POPUP CLOSE */
-addNewCardClose.addEventListener("click", () => {
-  closeModal(addNewCardModal);
-});
-
-/* PREVIEW IMAGE CLOSE*/
-imagePreviewClose.addEventListener("click", () => {
-  closeModal(imagePreviewModal);
 });
 
 /* SUBMITS NEW CARD IMG */
