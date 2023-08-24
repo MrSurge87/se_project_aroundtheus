@@ -69,9 +69,26 @@ function closeModal(modal) {
 
 function closeModalEscape(evt) {
   if (evt.key === "Escape") {
-    document.classList.remove("modal_opened");
+    const openedModal = document.querySelector(".modal_opened");
+    closeModal(openedModal);
   }
 }
+
+[
+  profileEditModal,
+  addNewCardModal,
+  profileModalForm,
+  imagePreviewModal,
+].forEach((modal) => {
+  modal.addEventListener("click", (evt) => {
+    if (
+      evt.target.classList.contains("modal") ||
+      evt.target.classList.contains("modal__close")
+    ) {
+      closeModal(modal);
+    }
+  });
+});
 
 function renderCard(cardData, wrapper) {
   const cardElement = getCardElement(cardData);
