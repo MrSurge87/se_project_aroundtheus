@@ -57,12 +57,20 @@ const imagePreviewTitle = imagePreviewModal.querySelector(
 const imagePreviewClose = imagePreviewModal.querySelector(".modal__close");
 /* FUNCTIONS */
 
-function closeModal(modal) {
-  modal.classList.remove("modal_opened");
-}
-
 function openModal(modal) {
   modal.classList.add("modal_opened");
+  document.addEventListener("keydown", closeModalEscape);
+}
+
+function closeModal(modal) {
+  modal.classList.remove("modal_opened");
+  document.removeEventListener("keydown", closeModalEscape);
+}
+
+function closeModalEscape(evt) {
+  if (evt.key === "Escape") {
+    document.classList.remove("modal_opened");
+  }
 }
 
 function renderCard(cardData, wrapper) {
