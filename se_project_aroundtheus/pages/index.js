@@ -1,3 +1,5 @@
+import Card from "../components/Card.js";
+
 const initialCards = [
   {
     name: "Yosemit Valley",
@@ -25,6 +27,14 @@ const initialCards = [
   },
 ];
 
+// const cardData = {
+//   name: "Yosemit Valley",
+//   link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
+// };
+
+// const card = new Card(cardData, "#card-template");
+// card.getView();
+
 const profileEditModal = document.querySelector("#profile-edit-modal");
 const profileName = document.querySelector("#profile__name");
 const profileDescription = document.querySelector("#profile__description");
@@ -49,7 +59,7 @@ const cardTitleInput = addNewCardModal.querySelector(
   ".modal__input_type_title"
 );
 const cardUrlInput = addNewCardModal.querySelector(".modal__input_type_url");
-const imagePreviewModal = document.querySelector("#preview-image-modal");
+const imagePreviewModal = document.querySelector(".modal__image-preview");
 const imagePreview = imagePreviewModal.querySelector(".modal__image-preview");
 const imagePreviewTitle = imagePreviewModal.querySelector(
   ".modal__image-preview-title"
@@ -91,23 +101,23 @@ function renderCard(cardData, wrapper) {
 }
 
 function getCardElement(data) {
-  const cardElement = cardTemplate.cloneNode(true);
-  const cardImageElement = cardElement.querySelector(".card__image");
-  const cardTitleElement = cardElement.querySelector(".card__title");
-  const likeButton = cardElement.querySelector(".card__like-button");
-  const deleteButton = cardElement.querySelector(".card__button-delete");
+  //const cardElement = cardTemplate.cloneNode(true);
+  //const cardImageElement = cardElement.querySelector(".card__image");
+  //const cardTitleElement = cardElement.querySelector(".card__title");
+  //const likeButton = cardElement.querySelector(".card__like-button");
+  //const deleteButton = cardElement.querySelector(".card__button-delete");
 
-  cardImageElement.setAttribute("src", data.link);
-  cardImageElement.setAttribute("alt", data.name);
-  cardTitleElement.textContent = data.name;
+  //cardImageElement.setAttribute("src", data.link);
+  //cardImageElement.setAttribute("alt", data.name);
+  //cardTitleElement.textContent = data.name;
 
-  likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle("card__like-button_active");
-  });
+  //likeButton.addEventListener("click", () => {
+  //likeButton.classList.toggle("card__like-button_active");
+  //});
 
-  deleteButton.addEventListener("click", () => {
-    cardElement.remove();
-  });
+  //deleteButton.addEventListener("click", () => {
+  //cardElement.remove();
+  //});
 
   cardImageElement.addEventListener("click", () => {
     imagePreview.src = data.link;
