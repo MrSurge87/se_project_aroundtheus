@@ -1,7 +1,7 @@
 export default class Card {
-  constructor(initialCards, cardSelector, handleImageClick) {
-    this._name = initialCards.name;
-    this._link = initialCards.link;
+  constructor(data, cardSelector, handleImageClick) {
+    this._name = data.name;
+    this._link = data.link;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
   }
@@ -23,6 +23,7 @@ export default class Card {
         this._cardElement.querySelector(
           "modal__image-preview-title"
         ).textContent = this._name;
+        this._openModal(document.querySelector(".modal__image-preview"));
       });
 
     //".card_-title"
@@ -54,8 +55,8 @@ export default class Card {
   // FUNCTIONS
 
   _openModal(modal) {
-    modal.classLIst.remove("modal_opened");
-    document.removeEventListener("keydown", closeModalEscape);
+    modal.classList.add("modal_opened");
+    document.addEventListener("keydown", closeModalEscape);
   }
 
   _handleLikeIcon() {
@@ -69,6 +70,11 @@ export default class Card {
     this._cardElement = null;
   }
 
+  _renderCard() {
+    const cardElement = new Card(cardData);
+    wrapper.prepend(cardElement.getView());
+  }
+
   getView() {
     this._cardElement = document
       .querySelector(this._cardSelector)
@@ -79,5 +85,6 @@ export default class Card {
     //set event listeners
     this._setEventListeners();
     //return the card
+    return cardElement;
   }
 }

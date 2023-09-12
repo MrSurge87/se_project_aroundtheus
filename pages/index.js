@@ -1,4 +1,5 @@
 import Card from "../components/Card.js";
+import FormValidator from "../components/FormValidator.js";
 
 const initialCards = [
   {
@@ -27,13 +28,12 @@ const initialCards = [
   },
 ];
 
-// const cardData = {
-//   name: "Yosemit Valley",
-//   link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-// };
+const cardData = initialCards.forEach((data) => {
+  return data;
+});
 
-// const card = new Card(cardData, "#card-template");
-// card.getView();
+const card = new Card(cardData, "#card-template");
+card.getView();
 
 const profileEditModal = document.querySelector("#profile-edit-modal");
 const profileName = document.querySelector("#profile__name");
@@ -96,8 +96,8 @@ function closeModalEscape(evt) {
 });
 
 function renderCard(cardData, wrapper) {
-  const cardElement = getCardElement(cardData);
-  wrapper.prepend(cardElement);
+  const cardElement = new Card(cardData);
+  wrapper.prepend(cardElement.getView());
 }
 
 function getCardElement(data) {
@@ -126,7 +126,7 @@ function getCardElement(data) {
     openModal(imagePreviewModal);
   });
 
-  return cardElement;
+  //return cardElement;
 }
 
 /* EVENT HANDLERS */

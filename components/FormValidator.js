@@ -1,30 +1,53 @@
 class FormValidator {
-  constructor(getSettings, formElement) {
-    this._getSettings = getSettings;
+  constructor(config, formElement) {
+    this._inputSelector = config.inputSelector;
+    this._submitButtonSelector = config.submitButtonSelector;
+    this._inactiveButtonClass = config.inactiveButtonClass;
+    this._inputErrorClass = config.inputErrorClass;
+    this._errorClass = config.errorClass;
     this._formElement = formElement;
   }
 
+  //SHOW ERROR MESSAGE METHOD
   _showInputError(formEl, inputEl, { inputErrorClass, errorClass }) {
     const errorMessageEl = formEl.querySelector(`#${inputEl.id}-error`);
-    inputEl.classList.add(inputErrorClass);
+    inputEl.classList.add(this._inputErrorClass);
     errorMessageEl.textContent = inputEl.validationMessage;
     errorMessageEl.classList.add(errorClass);
   }
 
+  //HIDE ERROR MESSAGE METHOD
+  _hideInputError(formEl, inputEl, { inputErrorClass, errorClass }) {
+    const errorMessageEl = formEl.querySelector(`#${inputEl.id}-error`);
+    inputEl.classList.remove(inputErrorClass);
+    errorMessageEl.textContent = "";
+    errorMessageEl.classList.remove(errorClass);
+  }
+  //CHECK VALIDITY METHOD
+  _checkInputValidity(formEl, inputEl, options) {
+    if (!inputEl.validity.valid) {
+      return showInputError(formEl, inputEl, options);
+    }
+    hideInputError(formEl, inputEl, options);
+  }
+
+  //TOGGLE BUTTON METHOD
   _toggleButtonState(inputEls, submitButton, { inactiveButtonClass }) {
     if (hasInvalidInput(inputEls)) {
-      submitButton.classList.add(inactiveButtonClass);
+      submitButton.classList.add(getSettings.inactiveButtonClass);
       submitButton.disabled = true;
       return;
     }
-    submitButton.classList.remove(inactiveButtonClass);
+    submitButton.classList.remove(getSettings.inactiveButtonClass);
     submitButton.disabled = false;
   }
 
+  //HAS VALID INPUT METHOD
   _hasInvalidInput(inputList) {
     return !inputList.every((inputEl) => inputEl.validity.valid);
   }
 
+  //SETS EVENT LISTENERS
   _setEventListeners() {
     const inputEls = [
       this._formElement.querySelectorAll(this._getSettings.inputSelector),
@@ -50,11 +73,4 @@ class FormValidator {
   }
 }
 
-const getSettings = {
-  formSelector: ".modal__form",
-  inputSelector: ".modal__input",
-  submitButtonSelector: ".modal__button",
-  inactiveButtonClass: "modal__button_disabled",
-  inputErrorClass: "modal__input_type_error",
-  errorClass: "modal__error_visible",
-};
+export default FormValidator;
