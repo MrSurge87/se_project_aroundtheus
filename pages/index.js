@@ -28,13 +28,6 @@ const initialCards = [
   },
 ];
 
-const cardData = {
-  name: "Yosemit Valley",
-  link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-};
-
-const card = new Card(cardData, "#card_template");
-
 const profileEditModal = document.querySelector("#profile-edit-modal");
 const profileName = document.querySelector("#profile__name");
 const profileDescription = document.querySelector("#profile__description");
@@ -97,35 +90,35 @@ function closeModalEscape(evt) {
 });
 
 function renderCard(data, wrapper) {
-  const cardElement = new Card(data, "#card__template").getView();
-  wrapper.prepend(Card(data));
+  const card = new Card(data, "#card-template");
+  wrapper.prepend(card.getView());
 }
 
 function getCardElement(data) {
-  const cardElement = cardTemplate.cloneNode(true);
+  //const cardElement = cardTemplate.cloneNode(true);
   const cardImageElement = cardElement.querySelector(".card__image");
   const cardTitleElement = cardElement.querySelector(".card__title");
-  const likeButton = cardElement.querySelector(".card__like-button");
-  const deleteButton = cardElement.querySelector(".card__button-delete");
+  //const likeButton = cardElement.querySelector(".card__like-button");
+  //const deleteButton = cardElement.querySelector(".card__button-delete");
 
   cardImageElement.setAttribute("src", data.link);
   cardImageElement.setAttribute("alt", data.name);
   cardTitleElement.textContent = data.name;
 
-  likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle("card__like-button_active");
-  });
+  // likeButton.addEventListener("click", () => {
+  //   likeButton.classList.toggle("card__like-button_active");
+  // });
 
-  deleteButton.addEventListener("click", () => {
-    cardElement.remove();
-  });
+  // deleteButton.addEventListener("click", () => {
+  //   cardElement.remove();
+  // });
 
-  cardImageElement.addEventListener("click", () => {
-    imagePreview.src = data.link;
-    imagePreview.alt = `Preview of ${data.name}`;
-    imagePreviewTitle.textContent = data.name;
-    openModal(imagePreviewModal);
-  });
+  // cardImageElement.addEventListener("click", () => {
+  //   imagePreview.src = data.link;
+  //   imagePreview.alt = `Preview of ${data.name}`;
+  //   imagePreviewTitle.textContent = data.name;
+  //   openModal(imagePreviewModal);
+  // });
 
   //return cardElement;
 }
@@ -181,5 +174,5 @@ const config = {
   errorClass: "modal__error_visible",
 };
 
-const addFormValidator = new FormValidator(config, profileModalForm);
-addFormValidator.enableValidation();
+const editFormValidator = new FormValidator(config, profileEditModal);
+editFormValidator.enableValidation();

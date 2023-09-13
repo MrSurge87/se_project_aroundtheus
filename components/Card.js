@@ -16,16 +16,16 @@ class Card {
 
     //".card__delete-button"
     const deleteButton = this._cardElement.querySelector(
-      ".card__delete-button"
+      ".card__button-delete"
     );
     deleteButton.addEventListener("click", () => {
       this._cardElement.remove();
     });
 
     //get card image
-    const imagePreviewModal = document.querySelector("modal__image-preview");
+    const imagePreviewModal = document.querySelector(".modal__image-preview");
     const imagePreview = imagePreviewModal.querySelector(
-      "modal__image-preview"
+      ".modal__image-preview"
     );
     const imagePreviewtitle = imagePreviewModal.querySelector(
       ".modal__image-preview-title"
@@ -48,6 +48,7 @@ class Card {
     //set event listeners
     this._setEventListeners();
     // return the card
+    return this._cardElement;
   }
 }
 
