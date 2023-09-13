@@ -1,5 +1,5 @@
-import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
+import Card from "../components/Card.js";
 
 const initialCards = [
   {
@@ -28,12 +28,12 @@ const initialCards = [
   },
 ];
 
-const cardData = initialCards.forEach((data) => {
-  return data;
-});
+const cardData = {
+  name: "Yosemit Valley",
+  link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
+};
 
-const card = new Card(cardData, "#card-template");
-card.getView();
+const card = new Card(cardData, "#card_template");
 
 const profileEditModal = document.querySelector("#profile-edit-modal");
 const profileName = document.querySelector("#profile__name");
@@ -65,6 +65,7 @@ const imagePreviewTitle = imagePreviewModal.querySelector(
   ".modal__image-preview-title"
 );
 const imagePreviewClose = imagePreviewModal.querySelector(".modal__close");
+
 /* FUNCTIONS */
 
 function openModal(modal) {
@@ -95,29 +96,29 @@ function closeModalEscape(evt) {
   });
 });
 
-function renderCard(cardData, wrapper) {
-  const cardElement = new Card(cardData);
-  wrapper.prepend(cardElement.getView());
+function renderCard(data, wrapper) {
+  const cardElement = new Card(data, "#card__template").getView();
+  wrapper.prepend(Card(data));
 }
 
 function getCardElement(data) {
-  //const cardElement = cardTemplate.cloneNode(true);
-  //const cardImageElement = cardElement.querySelector(".card__image");
-  //const cardTitleElement = cardElement.querySelector(".card__title");
-  //const likeButton = cardElement.querySelector(".card__like-button");
-  //const deleteButton = cardElement.querySelector(".card__button-delete");
+  const cardElement = cardTemplate.cloneNode(true);
+  const cardImageElement = cardElement.querySelector(".card__image");
+  const cardTitleElement = cardElement.querySelector(".card__title");
+  const likeButton = cardElement.querySelector(".card__like-button");
+  const deleteButton = cardElement.querySelector(".card__button-delete");
 
-  //cardImageElement.setAttribute("src", data.link);
-  //cardImageElement.setAttribute("alt", data.name);
-  //cardTitleElement.textContent = data.name;
+  cardImageElement.setAttribute("src", data.link);
+  cardImageElement.setAttribute("alt", data.name);
+  cardTitleElement.textContent = data.name;
 
-  //likeButton.addEventListener("click", () => {
-  //likeButton.classList.toggle("card__like-button_active");
-  //});
+  likeButton.addEventListener("click", () => {
+    likeButton.classList.toggle("card__like-button_active");
+  });
 
-  //deleteButton.addEventListener("click", () => {
-  //cardElement.remove();
-  //});
+  deleteButton.addEventListener("click", () => {
+    cardElement.remove();
+  });
 
   cardImageElement.addEventListener("click", () => {
     imagePreview.src = data.link;
@@ -169,3 +170,16 @@ addNewCardModal.addEventListener("submit", handleAddCardFormSubmit);
 
 /* CARDS FOR EACH */
 initialCards.forEach((cardData) => renderCard(cardData, cardListElement));
+
+//VALIDATION
+const config = {
+  formSelector: ".modal__form",
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__button",
+  inactiveButtonClass: "modal__button_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_visible",
+};
+
+const addFormValidator = new FormValidator(config, profileModalForm);
+addFormValidator.enableValidation();
