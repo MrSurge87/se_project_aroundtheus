@@ -9,34 +9,33 @@ class Card {
 
   _setEventListeners() {
     //".card__like-button"
-    const likeButton = this._cardElement.querySelector(".card__like-button");
-    likeButton.addEventListener("click", () => {
-      likeButton.classList.toggle("card__like-button_active");
-    });
+    this._cardElement
+      .querySelector(".card__like-button")
+      .addEventListener("click", () => this._handleLikeIcon);
 
     //".card__delete-button"
-    const deleteButton = this._cardElement.querySelector(
-      ".card__button-delete"
-    );
-    deleteButton.addEventListener("click", () => {
-      this._cardElement.remove();
-    });
+    this._cardElement
+      .querySelector(".card__button-delete")
+      .addEventListener("click", () => this._handleDeleteCard);
 
     //get card image
-    const imagePreviewModal = document.querySelector(".modal__image-preview");
-    const imagePreview = imagePreviewModal.querySelector(
-      ".modal__image-preview"
-    );
-    const imagePreviewtitle = imagePreviewModal.querySelector(
-      ".modal__image-preview-title"
-    );
-    const cardImageElement = this._cardElement.querySelector(".card__image");
-    cardImageElement.addEventListener("click", () => {
-      imagePreview.src = this._link;
-      imagePreview.alt = `Preview of ${data.name}`;
-      imagePreviewtitle.textContent = this._name;
-      openModal(imagePreviewModal);
-    });
+    this._cardElement
+      .querySelector(".card__image")
+      .addEventListener("click", () => this._handleImageClick(this));
+  }
+
+  _handleLikeIcon() {
+    this._cardElement
+      .querySelector(".card__like-button")
+      .toggle("card__like-button_active");
+  }
+
+  _handleDeleteCard() {
+    this._cardElement
+      .querySelector(".card__button-delete")
+      .addEventListener("click", () => {
+        this._cardElement.remove();
+      });
   }
 
   getView() {
@@ -45,6 +44,10 @@ class Card {
       .content.querySelector(".card")
       .cloneNode(true);
     //get the card view
+    this._cardElement.querySelector(
+      ".card__image"
+    ).style.backgroundImage = `url(${this._link})`;
+    this._cardElement.querySelector(".card__title").textContent = this._name;
     //set event listeners
     this._setEventListeners();
     // return the card
