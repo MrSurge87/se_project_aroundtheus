@@ -11,17 +11,20 @@ class Card {
     //".card__like-button"
     this._cardElement
       .querySelector(".card__like-button")
-      .addEventListener("click", () => this._handleLikeIcon);
+      .addEventListener("click", () => this._handleLikeIcon());
 
     //".card__delete-button"
     this._cardElement
       .querySelector(".card__button-delete")
-      .addEventListener("click", () => this._handleDeleteCard);
+      .addEventListener("click", () => this._handleDeleteCard());
 
     //get card image
-    this._cardElement
-      .querySelector(".card__image")
-      .addEventListener("click", () => this._handleImageClick(this));
+    this._cardElement.addEventListener("click", () => {
+      this._handleImageClick({
+        name: this._name,
+        link: this._link,
+      });
+    });
   }
 
   _handleLikeIcon() {

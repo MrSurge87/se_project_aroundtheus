@@ -91,55 +91,50 @@ function closeModalEscape(evt) {
   });
 });
 
-function _handlePreviewPicture() {
-  const cardImageElement = this._cardElement.querySelector(".card__image");
-  const cardTitleElement = this._cardElement.querySelector(".card__title");
-  const imagePreviewModal = document.querySelector(".modal__image-preview");
-  const imagePreview = imagePreviewModal.querySelector(".modal__image-preview");
-  const imagePreviewTitle = imagePreviewModal.querySelector(
-    ".modal__image-preview-title"
-  );
+function handleImageClick(data) {
+  imagePreview.src = data.link;
+  imagePreview.alt = `Photo of ${data.name}`;
+  imagePreviewTitle.textContent = data.name;
 
-  cardImageElement.setAttribute("src", this._link);
-  cardImageElement.setAttribute("alt", this._name);
-  cardTitleElement.textContent = this._name;
-  openModal(cardImageElement);
+  openModal(previewImageModal);
 }
 
 //RENDER CARD
 function renderCard(data, wrapper) {
-  const card = new Card(data, cardSelector, _handlePreviewPicture);
+  const card = new Card(data, "#card-template", handleImageClick);
+  // HERE you should call the method which opens modal with arguments
+
   wrapper.prepend(card.getView());
 }
 
-function getCardElement(data) {
-  //const cardElement = cardTemplate.cloneNode(true);
-  //const cardImageElement = cardElement.querySelector(".card__image");
-  //const cardTitleElement = cardElement.querySelector(".card__title");
-  //const likeButton = cardElement.querySelector(".card__like-button");
-  //const deleteButton = cardElement.querySelector(".card__button-delete");
+//function getCardElement(data) {
+//const cardElement = cardTemplate.cloneNode(true);
+//const cardImageElement = cardElement.querySelector(".card__image");
+//const cardTitleElement = cardElement.querySelector(".card__title");
+//const likeButton = cardElement.querySelector(".card__like-button");
+//const deleteButton = cardElement.querySelector(".card__button-delete");
 
-  //cardImageElement.setAttribute("src", data.link);
-  //cardImageElement.setAttribute("alt", data.name);
-  //cardTitleElement.textContent = data.name;
+//cardImageElement.setAttribute("src", data.link);
+//cardImageElement.setAttribute("alt", data.name);
+//cardTitleElement.textContent = data.name;
 
-  // likeButton.addEventListener("click", () => {
-  //   likeButton.classList.toggle("card__like-button_active");
-  // });
-  p;
-  // deleteButton.addEventListener("click", () => {
-  //   cardElement.remove();
-  // });
+// likeButton.addEventListener("click", () => {
+//   likeButton.classList.toggle("card__like-button_active");
+// });
 
-  // cardImageElement.addEventListener("click", () => {
-  //   imagePreview.src = data.link;
-  //   imagePreview.alt = `Preview of ${data.name}`;
-  //   imagePreviewTitle.textContent = data.name;
-  //   openModal(imagePreviewModal);
-  // });
+// deleteButton.addEventListener("click", () => {
+//   cardElement.remove();
+// });
 
-  //return cardElement;
-}
+// cardImageElement.addEventListener("click", () => {
+//   imagePreview.src = data.link;
+//   imagePreview.alt = `Preview of ${data.name}`;
+//   imagePreviewTitle.textContent = data.name;
+//   openModal(imagePreviewModal);
+// });
+
+//return cardElement;
+//}
 
 /* EVENT HANDLERS */
 
@@ -190,7 +185,7 @@ const config = {
   errorClass: "modal__error_visible",
 };
 
-const editFormValidator = new FormValidator(config, profileEditModal);
+const editFormValidator = new FormValidator(config, imagePreviewModal);
 const cardFormValidator = new FormValidator(config, addNewCardModal);
 
 editFormValidator.enableValidation();
