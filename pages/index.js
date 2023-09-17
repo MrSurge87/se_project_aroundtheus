@@ -52,7 +52,7 @@ const cardTitleInput = addNewCardModal.querySelector(
   ".modal__input_type_title"
 );
 const cardUrlInput = addNewCardModal.querySelector(".modal__input_type_url");
-const imagePreviewModal = document.querySelector(".modal__image-preview");
+const imagePreviewModal = document.querySelector("#preview-image-modal");
 const imagePreview = imagePreviewModal.querySelector(".modal__image-preview");
 const imagePreviewTitle = imagePreviewModal.querySelector(
   ".modal__image-preview-title"
@@ -96,7 +96,7 @@ function handleImageClick(data) {
   imagePreview.alt = `Photo of ${data.name}`;
   imagePreviewTitle.textContent = data.name;
 
-  openModal(previewImageModal);
+  openModal(imagePreviewModal);
 }
 
 //RENDER CARD
@@ -185,7 +185,7 @@ const config = {
   errorClass: "modal__error_visible",
 };
 
-const editFormValidator = new FormValidator(config, imagePreviewModal);
+const editFormValidator = new FormValidator(config, profileModalForm);
 const cardFormValidator = new FormValidator(config, addNewCardModal);
 
 editFormValidator.enableValidation();
