@@ -102,8 +102,6 @@ function handleImageClick(data) {
 //RENDER CARD
 function renderCard(data, wrapper) {
   const card = new Card(data, "#card-template", handleImageClick);
-  // HERE you should call the method which opens modal with arguments
-
   wrapper.prepend(card.getView());
 }
 
@@ -151,6 +149,7 @@ function handleAddCardFormSubmit(event) {
   const link = cardUrlInput.value;
   renderCard({ name, link }, cardListElement);
   addNewCardForm.reset();
+  // diable button
   closeModal(addNewCardModal);
 }
 
