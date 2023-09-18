@@ -150,7 +150,9 @@ function handleAddCardFormSubmit(event) {
   renderCard({ name, link }, cardListElement);
   addNewCardForm.reset();
   // diable button
+
   closeModal(addNewCardModal);
+  resetValidation(addNewCardModal);
 }
 
 /* OPENS EDIT PROFILE */
