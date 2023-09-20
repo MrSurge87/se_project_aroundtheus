@@ -156,6 +156,7 @@
 
   .modal__button {
     height: 46px;
+    width: 238px;
   }
 }
 
@@ -166,19 +167,23 @@
     width: 282px;
     margin-top: 123px;
     padding: 0 0 0 22px;
+    border: 10px;
   }
 
   .modal__heading {
     font-size: 18px;
     padding: 0;
     margin-top: 25px;
+    line-height: 22px;
   }
 
   .modal__input {
     margin: 75px 0 0;
     padding: 0;
     font-size: 14px;
-    height: 27px;
+    height: 26px;
+    width: 238px;
+    border: 1px;
   }
 
   .modal__input:last-of-type {
@@ -189,5 +194,17 @@
   .modal__button {
     margin: 45px 0 25px 0;
     font-size: 14px;
+    line-height: 17px;
+    border-radius: 2px;
+  }
+
+  .modal__close {
+    width: 26px;
+    height: 26px;
+  }
+
+  .modal__image-preview {
+    width: 240px;
+    height: 299px;
   }
 }
