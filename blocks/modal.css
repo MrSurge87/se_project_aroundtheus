@@ -164,10 +164,11 @@
   .modal__container {
     max-height: 322px;
     height: 322px;
-    width: 282px;
-    margin-top: 123px;
+    max-width: calc(100% - 19px * 2);
     padding: 0 0 0 22px;
-    border: 10px;
+    border: 1px;
+    position: absolute;
+    top: 123px;
   }
 
   .modal__heading {
