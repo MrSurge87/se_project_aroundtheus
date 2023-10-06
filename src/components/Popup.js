@@ -1,5 +1,3 @@
-import Card from "./Card.js";
-
 export default class Popup {
   constructor({ popupSelector }) {
     this._popupElement = document.querySelector(popupSelector);
@@ -8,7 +6,7 @@ export default class Popup {
 
   open() {
     //opens popup
-    this._popupElement.classList.add(".modal_opened");
+    this._popupElement.classList.add("modal_opened");
     document.addEventListener("keydown", this._closeModalEscape);
   }
 
@@ -18,12 +16,12 @@ export default class Popup {
     document.removeEventListener("keydown", this._closeModalEscape);
   }
 
-  _closeModalEscape(evt) {
+  _closeModalEscape = (evt) => {
     //listens for esc button
     if (evt.key === "Escape") {
       this.close();
     }
-  }
+  };
 
   setEventListeners() {
     //sets event listeners
