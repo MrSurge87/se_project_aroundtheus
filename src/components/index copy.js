@@ -125,7 +125,7 @@ function handleAddCardFormSubmit(event) {
 profileEditButton.addEventListener("click", () => {
   profileModalName.value = profileName.textContent;
   profileModalDescription.value = profileDescription.textContent.trim();
-  openModal(profileEditModal);
+  profileEditButton.open();
 });
 
 //SAVES NAME CHANGE AND DESRIPTION
@@ -193,6 +193,5 @@ function handleImageClick(data) {
   imagePreview.src = data.link;
   imagePreview.alt = `Photo of ${data.name}`;
   imagePreviewTitle.textContent = data.name;
-
   imagePopup.open(imagePreviewModal);
 }

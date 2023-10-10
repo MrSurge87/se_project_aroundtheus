@@ -18,4 +18,5 @@ export default class Userinfo {
     this._title.textContent = data.title;
     //takses a new user data and adds it on the page.
   }
+
 }
