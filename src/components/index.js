@@ -85,6 +85,11 @@ imagePopup.setEventListeners();
 //FORM POPUP
 
 const openImagePopup = new PopupWithForm("#add-new-card", handleFormSubmit);
+
+addNewCardButton.addEventListener("click", () => {
+  openImagePopup.open();
+});
+
 const openFormPopup = new PopupWithForm("#profile-edit-modal", handleFormSubmit);
 openFormPopup.setEventListeners();
 openImagePopup.setEventListeners();
@@ -96,13 +101,27 @@ editFormValidator.enableValidation();
 cardFormValidator.enableValidation();
 
 //FORM SUBMIT
-function handleFormSubmit() {}
+function handleFormSubmit() {
+  profileName.textContent = profileModalName.value;
+  profileDescription.textContent = profileModalDescription.value;
+  editProfile.close();
+}
+
+// //IMAGE SUBMIT
+function handleAddCardFormSubmit(event) {
+  event.preventDefault();
+  const name = cardTitleInput.value;
+  const link = cardUrlInput.value;
+  renderCard({ name, link }, cardListElement);
+  addNewCardForm.reset();
+  cardFormValidator.toggleButtonState();
+  closeModal(addNewCardModal);
+}
 
 //PROFILE EDIT POPUP
 const userInfo = new UserInfo(".profile__title", ".profile__description");
 const editProfile = new PopupWithForm("#profile-edit-modal", (data) => {
   userInfo.setUserInfo(data);
-  editProfile.close();
 });
 editProfile.setEventListeners();
 
@@ -114,26 +133,5 @@ profileEditButton.addEventListener("click", () => {
   openFormPopup.open();
 });
 
-addNewCardButton.addEventListener("click", () => {
-  openImagePopup.open();
-});
-
-// //PROFILE SUBMIT
-// function handleProfileFormSubmit(event) {
-//   event.preventDefault();
-//   profileName.textContent = profileModalName.value;
-//   profileDescription.textContent = profileModalDescription.value;
-// }
 
 
-
-// //IMAGE SUBMIT
-// function handleAddCardFormSubmit(event) {
-//   event.preventDefault();
-//   const name = cardTitleInput.value;
-//   const link = cardUrlInput.value;
-//   renderCard({ name, link }, cardListElement);
-//   addNewCardForm.reset();
-//   cardFormValidator.toggleButtonState();
-//   closeModal(addNewCardModal);
-// }
