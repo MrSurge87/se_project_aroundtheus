@@ -12,7 +12,7 @@ export default class Section {
     });
   }
 
-  addItems(item) {
+  addItem(item) {
     // take the item and render it into this._element
     this._selector.prepend(item);
   }

@@ -13,10 +13,9 @@ export default class Userinfo {
     //returns an object with info about the user.
   }
 
-  setUserInfor(data) {
-    this._name.textContent = data.name;
-    this._title.textContent = data.title;
+  setUserInfo(data) {
+    this._name.textContent = data.title;
+    this._title.textContent = data.description;
     //takses a new user data and adds it on the page.
   }
-
 }
