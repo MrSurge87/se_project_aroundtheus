@@ -87,9 +87,9 @@
   margin-top: 30px;
 }
 
-.modal__input {
+/* .modal__input {
   border-bottom: 1px solid green;
-}
+} */
 .modal__error {
   border-bottom: 1px solid #f00;
 }
