@@ -1,3 +1,5 @@
+import Popup from "./Popup.js";
+
 export default class Card {
   constructor(data, cardSelector, { handleImageClick }) {
     this._name = data.name;
@@ -16,7 +18,6 @@ export default class Card {
     this._cardElement
       .querySelector(".card__button-delete")
       .addEventListener("click", () => this._handleDeleteCard());
-
   }
 
   _handleLikeIcon() {

@@ -3,35 +3,10 @@ import "../pages/index.css";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import FormValidator from "../components/FormValidator.js";
+import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
-
-const initialCards = [
-  {
-    name: "Yosemit Valley",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-  },
-  {
-    name: "Lake Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
-  },
-  {
-    name: "Bald Mountains",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
-  },
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
-  },
-  {
-    name: "Vanoise National Park",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
-  },
-  {
-    name: "Lago di Braises",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg ",
-  },
-];
+import Api from "../components/Api.js";
 
 //Profile Queries
 const profileEditModal = document.querySelector("#profile-edit-modal");
@@ -54,6 +29,16 @@ const addNewCardModal = document.querySelector("#add-new-card");
 const addNewCardForm = document.querySelector("#add-card-form");
 const addNewCardSubmit = document.querySelector("#new-card-submit");
 const cardList = document.querySelector(".cards__list");
+const cardDeleteButton = document.querySelector(".card__delete");
+
+//API EVENTS
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "5f2b588a-250e-4922-b74a-306ecb82bfe6",
+    "Content-Type": "application/json",
+  },
+});
 
 //VALIDATION
 const config = {
@@ -67,12 +52,10 @@ const config = {
 //SECTION RENDERER
 const cardSection = new Section(
   {
-    items: initialCards,
     renderer: generateCard,
   },
   ".cards__list"
 );
-cardSection.renderItems();
 
 function generateCard(item) {
   const cardElement = renderCard(item);
@@ -97,10 +80,8 @@ const openImagePopup = new PopupWithForm(
   "#add-new-card",
   handleImageFormSubmit
 );
-const editProfile = new PopupWithForm(
-  "#profile-edit-modal",
-  handleFormSubmit
-);
+const editProfile = new PopupWithForm("#profile-edit-modal", handleFormSubmit);
+
 editProfile.setEventListeners();
 openImagePopup.setEventListeners();
 
@@ -112,8 +93,8 @@ cardFormValidator.enableValidation();
 
 //FORM SUBMIT
 function handleFormSubmit(data) {
-  console.log(data)
-  userInfo.setUserInfo(data)
+  console.log(data);
+  userInfo.setUserInfo(data);
   editProfile.close();
 }
 
@@ -128,6 +109,8 @@ function handleImageFormSubmit() {
 //PROFILE EDIT POPUP
 const userInfo = new UserInfo(".profile__title", ".profile__description");
 
+//DELETE CARD
+
 //EDIT PROFILE
 profileEditButton.addEventListener("click", () => {
   profileModalName.value = profileName.textContent;
@@ -141,3 +124,17 @@ addNewCardButton.addEventListener("click", () => {
   openImagePopup.open();
 });
 
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([data, cards]) => {
+    userInfo.setUserInfo({ description: data.about, title: data.name });
+    //Add Avatar picture info
+
+    cardList = new Section(
+      { data: cards, renderer: renderCard },
+      ".cards__list"
+    );
+    cardList.renderItems();
+  })
+  .catch((err) => {
+    console.log(err);
+  });

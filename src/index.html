@@ -110,18 +110,14 @@
             required
           />
           <span class="modal__error" id="modal-Url-error"></span>
-          <button
-            class="modal__button"
-            type="submit"
-            id="new-card-submit"
-       
-          >
+          <button class="modal__button" type="submit" id="new-card-submit">
             Save
           </button>
         </form>
       </div>
     </div>
 
+    <!-- Preview Image -->
     <div class="modal" id="preview-image-modal">
       <div class="modal__preview">
         <button class="modal__close" type="button"></button>
@@ -129,6 +125,14 @@
         <h2 class="modal__image-preview-title"></h2>
       </div>
     </div>
+
+    <!-- Card Delete Prompt -->
+    <div class="modal" id="card__delete-modal">
+      <div class="modal__container">
+        <button class="modal__close" id="card__delete-modal-close" type="button"></button>
+        <p class="modal__heading">Are You Sure</p>
+        <button class="card__delete-submit">Yes</button>
+
 
     <template id="card-template">
       <li class="card">
