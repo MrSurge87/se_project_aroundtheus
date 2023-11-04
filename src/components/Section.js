@@ -5,6 +5,7 @@ export default class Section {
   }
 
   renderItems(items) {
+    console.log("CARDS", items);
     // use this._renderer to create the elements for rendering
     items.forEach(this._renderer);
   }

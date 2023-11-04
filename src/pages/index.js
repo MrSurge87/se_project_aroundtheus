@@ -14,6 +14,8 @@ const profileEditButton = document.querySelector("#profile-edit-button");
 const addNewCardButton = document.querySelector(".profile__add-button");
 const profileName = document.querySelector("#profile__name");
 const profileDescription = document.querySelector("#profile__description");
+const profilePicButton = document.querySelector(".profile__image-button");
+const profilePicModal = document.querySelector("#profile__image-edit");
 
 //Modal Queries
 const profileModalForm = profileEditModal.querySelector(".modal__form");
@@ -26,10 +28,7 @@ const newCardModalUrl = document.querySelector("#modal-Url");
 
 //Card Queries
 const addNewCardModal = document.querySelector("#add-new-card");
-const addNewCardForm = document.querySelector("#add-card-form");
-const addNewCardSubmit = document.querySelector("#new-card-submit");
-const cardList = document.querySelector(".cards__list");
-const cardDeleteButton = document.querySelector(".card__delete");
+
 
 //API EVENTS
 const api = new Api({
@@ -39,6 +38,7 @@ const api = new Api({
     "Content-Type": "application/json",
   },
 });
+
 
 //VALIDATION
 const config = {
@@ -66,6 +66,7 @@ function generateCard(item) {
 function renderCard(data) {
   const card = new Card(data, "#card-template", {
     handleImageClick: () => imagePopup.open(data),
+    handleDeleteClick
   });
   return card;
 }
@@ -74,67 +75,100 @@ function renderCard(data) {
 const imagePopup = new PopupWithImage("#preview-image-modal");
 imagePopup.setEventListeners();
 
-//FORM POPUP
+//DELETE CARD POPUP
+const deleteCardPopup = new PopupWithConfirmation("#card__delete-modal");
+deleteCardPopup.setEventListeners();
 
+const profileUpdateSubmit = new PopupWithConfirmation("#profile-edit-modal");
+profileUpdateSubmit.setEventListeners();
+
+function handleDeleteClick(card){
+  deleteCardPopup.open();
+  deleteCardPopup.setSubmitAction(() => {
+    deleteCardPopup.setSubmitText(true, "Deleting...");
+    api.deleteCard(card.id)
+    .then(() => {
+      deleteCardPopup.close();
+      card.removeCard();
+    })
+    .catch((err) => console.log(err))
+    .finally(() => deleteCardPopup.setSubmitText(false));
+  });
+}
+
+//FORM POPUP
 const openImagePopup = new PopupWithForm(
   "#add-new-card",
   handleImageFormSubmit
 );
 const editProfile = new PopupWithForm("#profile-edit-modal", handleFormSubmit);
+const profilePicEdit = new PopupWithForm("#profile__image-edit", handleImageFormSubmit);
+
 
 editProfile.setEventListeners();
+profilePicEdit.setEventListeners();
 openImagePopup.setEventListeners();
 
 const editFormValidator = new FormValidator(config, profileModalForm);
+const profilePicValidator = new FormValidator(config, profilePicModal);
 const cardFormValidator = new FormValidator(config, addNewCardModal);
 
 editFormValidator.enableValidation();
+profilePicValidator.enableValidation();
 cardFormValidator.enableValidation();
+
 
 //FORM SUBMIT
 function handleFormSubmit(data) {
-  console.log(data);
-  userInfo.setUserInfo(data);
-  editProfile.close();
+  api.profileUpdate(data).then(() => {  
+    userInfo.setUserInfo(data);
+    profileUpdateSubmit.setSubmitText(true, "Saving...");
+    editProfile.close();
+  })
 }
 
 // //IMAGE SUBMIT
 function handleImageFormSubmit() {
   const name = newCardModalTitle.value;
   const link = newCardModalUrl.value;
-  generateCard({ name, link });
-  openImagePopup.close();
+  api.addCard(name, link).then(() => {
+    generateCard({ name, link });
+    openImagePopup.close();
+  })
+}
+
+//IMAGE LIKE
+function handleImageLike(item) {
+
 }
 
 //PROFILE EDIT POPUP
 const userInfo = new UserInfo(".profile__title", ".profile__description");
 
-//DELETE CARD
-
-//EDIT PROFILE
+//EVENT LISTENERS
 profileEditButton.addEventListener("click", () => {
   profileModalName.value = profileName.textContent;
   profileModalDescription.value = profileDescription.textContent.trim();
   editProfile.open();
 });
 
-//EVENT LISTENERS
 addNewCardButton.addEventListener("click", () => {
   cardFormValidator.toggleButtonState();
   openImagePopup.open();
 });
 
+profilePicButton.addEventListener("click", () => {
+  profilePicEdit.open();
+});
+
+
+//API CALLS
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([data, cards]) => {
     userInfo.setUserInfo({ description: data.about, title: data.name });
-    //Add Avatar picture info
-
-    cardList = new Section(
-      { data: cards, renderer: renderCard },
-      ".cards__list"
-    );
-    cardList.renderItems();
+    cardSection.renderItems(cards);
   })
   .catch((err) => {
     console.log(err);
   });
+
