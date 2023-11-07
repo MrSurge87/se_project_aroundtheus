@@ -82,6 +82,9 @@ deleteCardPopup.setEventListeners();
 const profileUpdateSubmit = new PopupWithConfirmation("#profile-edit-modal");
 profileUpdateSubmit.setEventListeners();
 
+const newCardSubmit = new PopupWithConfirmation("#new-card-submit");
+//newCardSubmit.setEventListeners();
+
 function handleDeleteClick(card){
   deleteCardPopup.open();
   deleteCardPopup.setSubmitAction(() => {
@@ -132,9 +135,9 @@ function handleImageFormSubmit() {
   const name = newCardModalTitle.value;
   const link = newCardModalUrl.value;
   api.addCard(name, link).then(() => {
-    generateCard({ name, link });
-    openImagePopup.close();
-  })
+    generateCard({ name, link })
+      openImagePopup.close();
+  });
 }
 
 //IMAGE LIKE
