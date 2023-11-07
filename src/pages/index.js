@@ -18,6 +18,7 @@ const profilePicButton = document.querySelector(".profile__image-button");
 const profilePicModal = document.querySelector("#profile__image-edit");
 const profilePicUrl = document.querySelector("#modal-input-Url");
 
+
 //Modal Queries
 const profileModalForm = profileEditModal.querySelector(".modal__form");
 const profileModalName = document.querySelector("#modal-input-name");
@@ -83,8 +84,11 @@ deleteCardPopup.setEventListeners();
 const profileUpdateSubmit = new PopupWithConfirmation("#profile-edit-modal");
 profileUpdateSubmit.setEventListeners();
 
-const newCardSubmit = new PopupWithConfirmation("#new-card-submit");
-//newCardSubmit.setEventListeners();
+const newCardSubmit = new PopupWithConfirmation("#add-new-card");
+newCardSubmit.setEventListeners();
+
+const profileAvatarEdit = new PopupWithConfirmation("#profile__image-edit");
+profileAvatarEdit.setEventListeners();
 
 function handleDeleteClick(card){
   deleteCardPopup.open();
@@ -137,7 +141,8 @@ function handleImageFormSubmit() {
   const link = newCardModalUrl.value;
   api.addCard(name, link).then(() => {
     generateCard({ name, link })
-      openImagePopup.close();
+    newCardSubmit.setSubmitText(true, "Saving...");
+    openImagePopup.close();
   });
 }
 
