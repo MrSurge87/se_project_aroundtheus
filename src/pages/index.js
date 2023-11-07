@@ -16,6 +16,7 @@ const profileName = document.querySelector("#profile__name");
 const profileDescription = document.querySelector("#profile__description");
 const profilePicButton = document.querySelector(".profile__image-button");
 const profilePicModal = document.querySelector("#profile__image-edit");
+const profilePicUrl = document.querySelector("#modal-input-Url");
 
 //Modal Queries
 const profileModalForm = profileEditModal.querySelector(".modal__form");
