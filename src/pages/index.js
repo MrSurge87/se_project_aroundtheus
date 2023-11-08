@@ -16,7 +16,8 @@ const profileName = document.querySelector("#profile__name");
 const profileDescription = document.querySelector("#profile__description");
 const profilePicButton = document.querySelector(".profile__image-button");
 const profilePicModal = document.querySelector("#profile__image-edit");
-const profilePicUrl = document.querySelector("#modal-input-Url");
+const profilePicUrl = document.querySelector("#modal-input-url");
+const profileImage = document.querySelector(".profile__image")
 
 
 //Modal Queries
@@ -87,8 +88,6 @@ profileUpdateSubmit.setEventListeners();
 const newCardSubmit = new PopupWithConfirmation("#add-new-card");
 newCardSubmit.setEventListeners();
 
-const profileAvatarEdit = new PopupWithConfirmation("#profile__image-edit");
-profileAvatarEdit.setEventListeners();
 
 function handleDeleteClick(card){
   deleteCardPopup.open();
@@ -110,12 +109,15 @@ const openImagePopup = new PopupWithForm(
   handleImageFormSubmit
 );
 const editProfile = new PopupWithForm("#profile-edit-modal", handleFormSubmit);
-const profilePicEdit = new PopupWithForm("#profile__image-edit", handleImageFormSubmit);
+const profilePicEdit = new PopupWithForm("#profile__image-edit", profilePicEditSubmit);
+
+
 
 
 editProfile.setEventListeners();
 profilePicEdit.setEventListeners();
 openImagePopup.setEventListeners();
+
 
 const editFormValidator = new FormValidator(config, profileModalForm);
 const profilePicValidator = new FormValidator(config, profilePicModal);
@@ -146,10 +148,20 @@ function handleImageFormSubmit() {
   });
 }
 
-//IMAGE LIKE
-function handleImageLike(item) {
-
+function profilePicEditSubmit() {
+  const link = profilePicUrl.value;
+  api.updateProfileAvatar(link)
+  .then(() => {
+    profileImage.src = link;
+    profilePicEdit.close();
+  });
 }
+
+
+//IMAGE LIKE
+// function handleImageLike(item) {
+//   api.cardLike(id);
+// }
 
 //PROFILE EDIT POPUP
 const userInfo = new UserInfo(".profile__title", ".profile__description");
