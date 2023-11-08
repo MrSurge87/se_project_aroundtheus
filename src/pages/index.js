@@ -149,19 +149,17 @@ function handleImageFormSubmit() {
 }
 
 function profilePicEditSubmit() {
-  const link = profilePicUrl.value;
-  api.updateProfileAvatar(link)
+  const url = profilePicUrl.value;
+  api.updateProfileAvatar(url)
   .then(() => {
-    profileImage.src = link;
+    profileImage.src = url;
     profilePicEdit.close();
   });
 }
 
 
 //IMAGE LIKE
-// function handleImageLike(item) {
-//   api.cardLike(id);
-// }
+
 
 //PROFILE EDIT POPUP
 const userInfo = new UserInfo(".profile__title", ".profile__description");
