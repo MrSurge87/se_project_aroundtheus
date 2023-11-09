@@ -83,10 +83,8 @@ const deleteCardPopup = new PopupWithConfirmation("#card__delete-modal");
 deleteCardPopup.setEventListeners();
 
 const profileUpdateSubmit = new PopupWithConfirmation("#profile-edit-modal");
-profileUpdateSubmit.setEventListeners();
-
 const newCardSubmit = new PopupWithConfirmation("#add-new-card");
-newCardSubmit.setEventListeners();
+
 
 
 function handleDeleteClick(card){
@@ -132,9 +130,9 @@ cardFormValidator.enableValidation();
 function handleFormSubmit(data) {
   api.profileUpdate(data).then(() => {  
     userInfo.setUserInfo(data);
-    profileUpdateSubmit.setSubmitText(true, "Saving...");
-    editProfile.close();
-  })
+      profileUpdateSubmit.setSubmitText(true, "Saving...");
+      editProfile.close();
+        });
 }
 
 // //IMAGE SUBMIT

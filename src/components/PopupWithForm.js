@@ -16,6 +16,14 @@ export default class PopupWithForm extends Popup {
     return data;
   }
 
+  setSubmitText(submit, submitText = "Saving..."){
+    if (submit) {
+        this._popupSubmit.textContent = submitText;
+    } else {
+        this._popupSubmit.textContent = "Yes";
+    }
+}
+
   setEventListeners() {
     super.setEventListeners();
     this._popupForm.addEventListener("submit", () => {
