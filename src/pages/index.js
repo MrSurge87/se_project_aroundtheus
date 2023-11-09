@@ -17,8 +17,7 @@ const profileDescription = document.querySelector("#profile__description");
 const profilePicButton = document.querySelector(".profile__image-button");
 const profilePicModal = document.querySelector("#profile__image-edit");
 const profilePicUrl = document.querySelector("#modal-input-url");
-const profileImage = document.querySelector(".profile__image")
-
+const profileImage = document.querySelector(".profile__image");
 
 //Modal Queries
 const profileModalForm = profileEditModal.querySelector(".modal__form");
@@ -32,7 +31,6 @@ const newCardModalUrl = document.querySelector("#modal-Url");
 //Card Queries
 const addNewCardModal = document.querySelector("#add-new-card");
 
-
 //API EVENTS
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
@@ -41,7 +39,6 @@ const api = new Api({
     "Content-Type": "application/json",
   },
 });
-
 
 //VALIDATION
 const config = {
@@ -69,7 +66,7 @@ function generateCard(item) {
 function renderCard(data) {
   const card = new Card(data, "#card-template", {
     handleImageClick: () => imagePopup.open(data),
-    handleDeleteClick
+    handleDeleteClick,
   });
   return card;
 }
@@ -85,19 +82,18 @@ deleteCardPopup.setEventListeners();
 const profileUpdateSubmit = new PopupWithConfirmation("#profile-edit-modal");
 const newCardSubmit = new PopupWithConfirmation("#add-new-card");
 
-
-
-function handleDeleteClick(card){
+function handleDeleteClick(card) {
   deleteCardPopup.open();
   deleteCardPopup.setSubmitAction(() => {
     deleteCardPopup.setSubmitText(true, "Deleting...");
-    api.deleteCard(card.id)
-    .then(() => {
-      deleteCardPopup.close();
-      card.removeCard();
-    })
-    .catch((err) => console.log(err))
-    .finally(() => deleteCardPopup.setSubmitText(false));
+    api
+      .deleteCard(card.id)
+      .then(() => {
+        deleteCardPopup.close();
+        card.removeCard();
+      })
+      .catch((err) => console.log(err))
+      .finally(() => deleteCardPopup.setSubmitText(false));
   });
 }
 
@@ -107,15 +103,14 @@ const openImagePopup = new PopupWithForm(
   handleImageFormSubmit
 );
 const editProfile = new PopupWithForm("#profile-edit-modal", handleFormSubmit);
-const profilePicEdit = new PopupWithForm("#profile__image-edit", profilePicEditSubmit);
-
-
-
+const profilePicEdit = new PopupWithForm(
+  "#profile__image-edit",
+  profilePicEditSubmit
+);
 
 editProfile.setEventListeners();
 profilePicEdit.setEventListeners();
 openImagePopup.setEventListeners();
-
 
 const editFormValidator = new FormValidator(config, profileModalForm);
 const profilePicValidator = new FormValidator(config, profilePicModal);
@@ -125,22 +120,21 @@ editFormValidator.enableValidation();
 profilePicValidator.enableValidation();
 cardFormValidator.enableValidation();
 
-
 //FORM SUBMIT
 function handleFormSubmit(data) {
-  api.profileUpdate(data).then(() => {  
+  api.profileUpdate(data).then(() => {
     userInfo.setUserInfo(data);
-      profileUpdateSubmit.setSubmitText(true, "Saving...");
-      editProfile.close();
-        });
+    profileUpdateSubmit.setSubmitText(true, "Saving...");
+    editProfile.close();
+  });
 }
 
 // //IMAGE SUBMIT
 function handleImageFormSubmit() {
   const name = newCardModalTitle.value;
   const link = newCardModalUrl.value;
-  api.addCard(name, link).then(() => {
-    generateCard({ name, link })
+  api.addCard(name, link).then((card) => {
+    generateCard(card);
     newCardSubmit.setSubmitText(true, "Saving...");
     openImagePopup.close();
   });
@@ -148,16 +142,13 @@ function handleImageFormSubmit() {
 
 function profilePicEditSubmit() {
   const url = profilePicUrl.value;
-  api.updateProfileAvatar(url)
-  .then(() => {
+  api.updateProfileAvatar(url).then(() => {
     profileImage.src = url;
     profilePicEdit.close();
   });
 }
 
-
 //IMAGE LIKE
-
 
 //PROFILE EDIT POPUP
 const userInfo = new UserInfo(".profile__title", ".profile__description");
@@ -178,7 +169,6 @@ profilePicButton.addEventListener("click", () => {
   profilePicEdit.open();
 });
 
-
 //API CALLS
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([data, cards]) => {
@@ -188,4 +178,3 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
   .catch((err) => {
     console.log(err);
   });
-
