@@ -79,7 +79,6 @@ imagePopup.setEventListeners();
 const deleteCardPopup = new PopupWithConfirmation("#card__delete-modal");
 deleteCardPopup.setEventListeners();
 
-
 function handleDeleteClick(card) {
   deleteCardPopup.open();
   deleteCardPopup.setSubmitAction(() => {
@@ -87,6 +86,7 @@ function handleDeleteClick(card) {
     api
       .deleteCard(card.id)
       .then(() => {
+        deleteCardPopup.setSubmitText(true, "Deleted...");
         deleteCardPopup.close();
         card.removeCard();
       })
@@ -120,27 +120,29 @@ cardFormValidator.enableValidation();
 
 //FORM SUBMIT
 function handleFormSubmit(data) {
+  editProfile.setSubmitText(true, "Saving...");
   api
     .profileUpdate(data)
     .then(() => {
       userInfo.setUserInfo(data);
-      editProfile.setSubmitText(true, "Saving...");
+      editProfile.setSubmitText(false);
+      editProfile.close();
     })
     .catch((err) => {
       console.log(err);
     });
-    editProfile.close();
 }
-
 
 // //IMAGE SUBMIT
 function handleImageFormSubmit() {
   const name = newCardModalTitle.value;
   const link = newCardModalUrl.value;
+  openImagePopup.setSubmitText(true, "Saving...");
   api
     .addCard(name, link)
     .then((card) => {
       generateCard(card);
+      openImagePopup.setSubmitText(false);
       openImagePopup.close();
     })
     .catch((err) => {
@@ -189,7 +191,11 @@ profilePicButton.addEventListener("click", () => {
 //API CALLS
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([data, cards]) => {
-    userInfo.setUserInfo({ about: data.about, title: data.name, avatar: data.avatar });
+    userInfo.setUserInfo({
+      about: data.about,
+      title: data.name,
+      avatar: data.avatar,
+    });
     cardSection.renderItems(cards);
   })
   .catch((err) => {
