@@ -20,9 +20,7 @@ export default class Api {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
     }).then(this._checkResponseOk)
-    .catch((err) => {
-      console.log(err);
-    });
+
   }
 
   //Get user info
@@ -30,9 +28,7 @@ export default class Api {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
     }).then(this._checkResponseOk)
-    .catch((err) => {
-      console.log(err);
-    });
+
   }
 
   //Profile Update
@@ -45,9 +41,7 @@ export default class Api {
       }),
       headers: this._headers,
     }).then(this._checkResponseOk)
-    .catch((err) => {
-      console.log(err);
-    });
+
   }
 
   //Adding Cards
@@ -60,9 +54,7 @@ export default class Api {
       }),
       headers: this._headers,
     }).then(this._checkResponseOk)
-    .catch((err) => {
-      console.log(err);
-    });
+
   }
 
   //Deleteing Cards
@@ -71,9 +63,7 @@ export default class Api {
       method: "DELETE",
       headers: this._headers,
     }).then(this._checkResponseOk)
-    .catch((err) => {
-      console.log(err);
-    });
+
   }
 
   //Like Button
@@ -82,9 +72,7 @@ export default class Api {
       method: "PUT",
       headers: this._headers,
     }).then(this._checkResponseOk)
-    .catch((err) => {
-      console.log(err);
-    });
+
   }
 
   //Remove Like from card
@@ -93,9 +81,7 @@ export default class Api {
       method: "DELETE",
       headers: this._headers,
     }).then(this._checkResponseOk)
-    .catch((err) => {
-      console.log(err);
-    });
+
   }
 
   //Profile picture update
@@ -107,8 +93,6 @@ export default class Api {
         avatar: link,
       }),
     }).then(this._checkResponseOk)
-    .catch((err) => {
-      console.log(err);
-    });
+
   }
 }

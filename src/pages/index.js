@@ -79,8 +79,6 @@ imagePopup.setEventListeners();
 const deleteCardPopup = new PopupWithConfirmation("#card__delete-modal");
 deleteCardPopup.setEventListeners();
 
-const profileUpdateSubmit = new PopupWithConfirmation("#profile-edit-modal");
-const newCardSubmit = new PopupWithConfirmation("#add-new-card");
 
 function handleDeleteClick(card) {
   deleteCardPopup.open();
@@ -122,36 +120,55 @@ cardFormValidator.enableValidation();
 
 //FORM SUBMIT
 function handleFormSubmit(data) {
-  api.profileUpdate(data).then(() => {
-    userInfo.setUserInfo(data);
-    profileUpdateSubmit.setSubmitText(true, "Saving...");
+  api
+    .profileUpdate(data)
+    .then(() => {
+      userInfo.setUserInfo(data);
+      editProfile.setSubmitText(true, "Saving...");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
     editProfile.close();
-  });
 }
+
 
 // //IMAGE SUBMIT
 function handleImageFormSubmit() {
   const name = newCardModalTitle.value;
   const link = newCardModalUrl.value;
-  api.addCard(name, link).then((card) => {
-    generateCard(card);
-    newCardSubmit.setSubmitText(true, "Saving...");
-    openImagePopup.close();
-  });
+  api
+    .addCard(name, link)
+    .then((card) => {
+      generateCard(card);
+      openImagePopup.close();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }
 
 function profilePicEditSubmit() {
   const url = profilePicUrl.value;
-  api.updateProfileAvatar(url).then(() => {
-    profileImage.src = url;
-    profilePicEdit.close();
-  });
+  api
+    .updateProfileAvatar(url)
+    .then(() => {
+      profileImage.src = url;
+      profilePicEdit.close();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }
 
 //IMAGE LIKE
 
 //PROFILE EDIT POPUP
-const userInfo = new UserInfo(".profile__title", ".profile__description");
+const userInfo = new UserInfo(
+  ".profile__title",
+  ".profile__description",
+  ".profile__image"
+);
 
 //EVENT LISTENERS
 profileEditButton.addEventListener("click", () => {
@@ -172,7 +189,7 @@ profilePicButton.addEventListener("click", () => {
 //API CALLS
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([data, cards]) => {
-    userInfo.setUserInfo({ description: data.about, title: data.name });
+    userInfo.setUserInfo({ about: data.about, title: data.name, avatar: data.avatar });
     cardSection.renderItems(cards);
   })
   .catch((err) => {
