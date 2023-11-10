@@ -67,6 +67,7 @@ function renderCard(data) {
   const card = new Card(data, "#card-template", {
     handleImageClick: () => imagePopup.open(data),
     handleDeleteClick,
+    handleCardLike
   });
   return card;
 }
@@ -83,7 +84,7 @@ deleteCardPopup.setEventListeners();
 function handleDeleteClick(card) {
   deleteCardPopup.open();
   deleteCardPopup.setSubmitAction(() => {
-    deleteCardPopup.setSubmitText(true, "Deleting...");cardFormValidatornew
+    deleteCardPopup.setSubmitText(true, "Deleting...");
     api
       .deleteCard(card.id)
       .then(() => {
@@ -140,7 +141,7 @@ function handleFormSubmit(data) {
 // //IMAGE SUBMIT
 function handleImageFormSubmit(data) {
   const name = data.name;
-  const link = data.link;
+  const link = data.url;
   openImagePopup.setSubmitText(true, "Saving...");
   api
     .addCard(name, link)
@@ -169,6 +170,26 @@ function profilePicEditSubmit() {
 }
 
 //IMAGE LIKE
+function handleCardLike(item) {
+  const newLikeStatus = !item.isLiked;
+  if(newLikeStatus) {
+    api.cardLike(item.getId())
+    .then((res) => {
+      item.setLikeStatus(res.isLiked);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  } else {
+    api.removeLike(item.getId())
+    .then((res) => {
+      item.setLikeStatus(res.isLiked);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+}
 
 //PROFILE EDIT POPUP
 const userInfo = new UserInfo(
