@@ -79,10 +79,11 @@ imagePopup.setEventListeners();
 const deleteCardPopup = new PopupWithConfirmation("#card__delete-modal");
 deleteCardPopup.setEventListeners();
 
+
 function handleDeleteClick(card) {
   deleteCardPopup.open();
   deleteCardPopup.setSubmitAction(() => {
-    deleteCardPopup.setSubmitText(true, "Deleting...");
+    deleteCardPopup.setSubmitText(true, "Deleting...");cardFormValidatornew
     api
       .deleteCard(card.id)
       .then(() => {
@@ -94,6 +95,8 @@ function handleDeleteClick(card) {
       .finally(() => deleteCardPopup.setSubmitText(false));
   });
 }
+
+
 
 //FORM POPUP
 const openImagePopup = new PopupWithForm(
@@ -110,13 +113,13 @@ editProfile.setEventListeners();
 profilePicEdit.setEventListeners();
 openImagePopup.setEventListeners();
 
-const editFormValidator = new FormValidator(config, profileModalForm);
-const profilePicValidator = new FormValidator(config, profilePicModal);
-const cardFormValidator = new FormValidator(config, addNewCardModal);
+const handleEditFormSubmit = new FormValidator(config, profileModalForm);
+const handleProfileFormSubmit = new FormValidator(config, profilePicModal);
+const handleCardFormSubmit = new FormValidator(config, addNewCardModal);
 
-editFormValidator.enableValidation();
-profilePicValidator.enableValidation();
-cardFormValidator.enableValidation();
+handleEditFormSubmit.enableValidation();
+handleProfileFormSubmit.enableValidation();
+handleCardFormSubmit.enableValidation();
 
 //FORM SUBMIT
 function handleFormSubmit(data) {
@@ -131,23 +134,25 @@ function handleFormSubmit(data) {
     .catch((err) => {
       console.log(err);
     });
+
 }
 
 // //IMAGE SUBMIT
-function handleImageFormSubmit() {
-  const name = newCardModalTitle.value;
-  const link = newCardModalUrl.value;
+function handleImageFormSubmit(data) {
+  const name = data.name;
+  const link = data.link;
   openImagePopup.setSubmitText(true, "Saving...");
   api
     .addCard(name, link)
     .then((card) => {
       generateCard(card);
-      openImagePopup.setSubmitText(false);
+      openImagePopup.setSubmitText(false)
       openImagePopup.close();
     })
     .catch((err) => {
       console.log(err);
     });
+  
 }
 
 function profilePicEditSubmit() {
@@ -180,7 +185,7 @@ profileEditButton.addEventListener("click", () => {
 });
 
 addNewCardButton.addEventListener("click", () => {
-  cardFormValidator.toggleButtonState();
+  handleCardFormSubmit.toggleButtonState();
   openImagePopup.open();
 });
 
