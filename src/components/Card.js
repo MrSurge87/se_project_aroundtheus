@@ -4,7 +4,7 @@ export default class Card {
     this._name = data.name;
     this._link = data.link;
     this.isLiked = data.isLiked;
-    this.id = data.id;
+    this.id = data._id;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
     this._handleDeleteClick = handleDeleteClick;
