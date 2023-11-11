@@ -170,20 +170,20 @@ function profilePicEditSubmit() {
 }
 
 //IMAGE LIKE
-function handleCardLike(item) {
-  const newLikeStatus = !item.isLiked;
+function handleCardLike(card) {
+  const newLikeStatus = !card.isLiked;
   if(newLikeStatus) {
-    api.cardLike(item.getId())
+    api.cardLike(card.getId())
     .then((res) => {
-      item.setLikeStatus(res.isLiked);
+      card.setLikeStatus(res.isLiked);
     })
     .catch((err) => {
       console.log(err);
     });
   } else {
-    api.removeLike(item.getId())
+    api.removeLike(card.getId())
     .then((res) => {
-      item.setLikeStatus(res.isLiked);
+      card.setLikeStatus(res.isLiked);
     })
     .catch((err) => {
       console.log(err);
