@@ -7,6 +7,7 @@ import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
+import utils from "../utils/constants.js";
 
 //Profile Queries
 const profileEditModal = document.querySelector("#profile-edit-modal");
@@ -25,8 +26,6 @@ const profileModalName = document.querySelector("#modal-input-name");
 const profileModalDescription = document.querySelector(
   "#modal-input-description"
 );
-const newCardModalTitle = document.querySelector("#modal-input-title");
-const newCardModalUrl = document.querySelector("#modal-Url");
 
 //Card Queries
 const addNewCardModal = document.querySelector("#add-new-card");
@@ -41,7 +40,7 @@ const api = new Api({
 });
 
 //VALIDATION
-const config = {
+const config =  {
   formSelector: ".modal__form",
   inputSelector: ".modal__input",
   submitButtonSelector: ".modal__button",
@@ -59,7 +58,7 @@ const cardSection = new Section(
 
 function generateCard(item) {
   const cardElement = renderCard(item);
-  cardSection.addItem(cardElement.getCard());
+  cardSection.addItem(cardElement);
 }
 
 //RENDER CARD
@@ -69,7 +68,7 @@ function renderCard(data) {
     handleDeleteClick,
     handleCardLike
   });
-  return card;
+  return card.getCard();
 }
 
 //IMAGE POPUP
@@ -88,7 +87,6 @@ function handleDeleteClick(card) {
     api
       .deleteCard(card.id)
       .then(() => {
-        deleteCardPopup.setSubmitText(true, "Deleted...");
         deleteCardPopup.close();
         card.removeCard();
       })
@@ -156,8 +154,9 @@ function handleImageFormSubmit(data) {
   
 }
 
-function profilePicEditSubmit() {
-  const url = profilePicUrl.value;
+function profilePicEditSubmit(data) {
+  const url = data.url;
+  profilePicEdit.setSubmitText(true, "Loading...");
   api
     .updateProfileAvatar(url)
     .then(() => {
@@ -166,7 +165,8 @@ function profilePicEditSubmit() {
     })
     .catch((err) => {
       console.log(err);
-    });
+    })
+    .finally(() => profilePicEdit.setSubmitText(false));
 }
 
 //IMAGE LIKE
