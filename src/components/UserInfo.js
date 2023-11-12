@@ -15,7 +15,7 @@ export default class Userinfo {
   }
 
   setUserInfo(data) {
-    this._name.textContent = data.title;
+    if (data.title) this._name.textContent = data.title;
     this._title.textContent = data.about;
     if (data.avatar) this._userAvatar.src = data.avatar;
     //takses a new user data and adds it on the page.

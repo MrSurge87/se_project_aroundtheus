@@ -45,11 +45,11 @@ export default class Api {
   }
 
   //Adding Cards
-  addCard(title, link) {
+  addCard(name, link) {
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
       body: JSON.stringify({
-        name: title,
+        name: name,
         link: link,
       }),
       headers: this._headers,
@@ -85,12 +85,12 @@ export default class Api {
   }
 
   //Profile picture update
-  updateProfileAvatar(link) {
+  updateProfileAvatar(url) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        avatar: link,
+        avatar: url,
       }),
     }).then(this._checkResponseOk)
 

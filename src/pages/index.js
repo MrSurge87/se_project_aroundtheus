@@ -7,10 +7,18 @@ import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
-import  { 
-  profileEditButton, addNewCardButton, profilePicButton, profilePicModal,
-  profileImage, profileModalForm, profileModalName, profileModalDescription, 
-  addNewCardModal, config } from "../utils/constants.js";
+import {
+  profileEditButton,
+  addNewCardButton,
+  profilePicButton,
+  profilePicModal,
+  profileImage,
+  profileModalForm,
+  profileModalName,
+  profileModalDescription,
+  addNewCardModal,
+  config,
+} from "../utils/constants.js";
 
 //API EVENTS
 const api = new Api({
@@ -39,7 +47,7 @@ function renderCard(data) {
   const card = new Card(data, "#card-template", {
     handleImageClick: () => imagePopup.open(data),
     handleDeleteClick,
-    handleCardLike
+    handleCardLike,
   });
   return card.getCard();
 }
@@ -51,7 +59,6 @@ imagePopup.setEventListeners();
 //DELETE CARD POPUP
 const deleteCardPopup = new PopupWithConfirmation("#card__delete-modal");
 deleteCardPopup.setEventListeners();
-
 
 function handleDeleteClick(card) {
   deleteCardPopup.open();
@@ -67,8 +74,6 @@ function handleDeleteClick(card) {
       .finally(() => deleteCardPopup.setSubmitText(false));
   });
 }
-
-
 
 //FORM POPUP
 const openImagePopup = new PopupWithForm(
@@ -106,7 +111,6 @@ function handleFormSubmit(data) {
       console.log(err);
     })
     .finally(() => editProfile.setSubmitText(false));
-
 }
 
 // //IMAGE SUBMIT
@@ -124,16 +128,14 @@ function handleImageFormSubmit(data) {
       console.log(err);
     })
     .finally(() => openImagePopup.setSubmitText(false));
-  
 }
 
 function profilePicEditSubmit(data) {
-  const url = data.url
   profilePicEdit.setSubmitText(true, "Loading...");
   api
-    .updateProfileAvatar(url)
-    .then(() => {
-      profileImage.src = url;
+    .updateProfileAvatar(data.url)
+    .then((data) => {
+      userInfo.setUserInfo(data);
       profilePicEdit.close();
     })
     .catch((err) => {
@@ -145,22 +147,24 @@ function profilePicEditSubmit(data) {
 //IMAGE LIKE
 function handleCardLike(card) {
   const newLikeStatus = !card.isLiked;
-  if(newLikeStatus) {
-    api.cardLike(card.getId())
-    .then((res) => {
-      card.setLikeStatus(res.isLiked);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  if (newLikeStatus) {
+    api
+      .cardLike(card.getId())
+      .then((res) => {
+        card.setLikeStatus(res.isLiked);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   } else {
-    api.removeLike(card.getId())
-    .then((res) => {
-      card.setLikeStatus(res.isLiked);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+    api
+      .removeLike(card.getId())
+      .then((res) => {
+        card.setLikeStatus(res.isLiked);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 }
 
