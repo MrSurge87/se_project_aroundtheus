@@ -85,13 +85,13 @@ editProfile.setEventListeners();
 profilePicEdit.setEventListeners();
 openImagePopup.setEventListeners();
 
-const handleEditFormSubmit = new FormValidator(config, profileModalForm);
-const handleProfileFormSubmit = new FormValidator(config, profilePicModal);
-const handleCardFormSubmit = new FormValidator(config, addNewCardModal);
+const profileFormValidator = new FormValidator(config, profileModalForm);
+const avatarFormValidator = new FormValidator(config, profilePicModal);
+const cardFormValidator = new FormValidator(config, addNewCardModal);
 
-handleEditFormSubmit.enableValidation();
-handleProfileFormSubmit.enableValidation();
-handleCardFormSubmit.enableValidation();
+profileFormValidator.enableValidation();
+avatarFormValidator.enableValidation();
+cardFormValidator.enableValidation();
 
 //FORM SUBMIT
 function handleFormSubmit(data) {
@@ -100,12 +100,12 @@ function handleFormSubmit(data) {
     .profileUpdate(data)
     .then(() => {
       userInfo.setUserInfo(data);
-      editProfile.setSubmitText(false);
       editProfile.close();
     })
     .catch((err) => {
       console.log(err);
-    });
+    })
+    .finally(() => editProfile.setSubmitText(false));
 
 }
 
@@ -118,17 +118,17 @@ function handleImageFormSubmit(data) {
     .addCard(name, link)
     .then((card) => {
       generateCard(card);
-      openImagePopup.setSubmitText(false)
       openImagePopup.close();
     })
     .catch((err) => {
       console.log(err);
-    });
+    })
+    .finally(() => openImagePopup.setSubmitText(false));
   
 }
 
 function profilePicEditSubmit(data) {
-  const url = data.url;
+  const url = data.url
   profilePicEdit.setSubmitText(true, "Loading...");
   api
     .updateProfileAvatar(url)
@@ -180,11 +180,12 @@ profileEditButton.addEventListener("click", () => {
 });
 
 addNewCardButton.addEventListener("click", () => {
-  handleCardFormSubmit.toggleButtonState();
+  cardFormValidator.toggleButtonState();
   openImagePopup.open();
 });
 
 profilePicButton.addEventListener("click", () => {
+  avatarFormValidator.toggleButtonState();
   profilePicEdit.open();
 });
 
