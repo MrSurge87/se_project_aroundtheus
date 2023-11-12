@@ -7,28 +7,10 @@ import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
-import utils from "../utils/constants.js";
-
-//Profile Queries
-const profileEditModal = document.querySelector("#profile-edit-modal");
-const profileEditButton = document.querySelector("#profile-edit-button");
-const addNewCardButton = document.querySelector(".profile__add-button");
-const profileName = document.querySelector("#profile__name");
-const profileDescription = document.querySelector("#profile__description");
-const profilePicButton = document.querySelector(".profile__image-button");
-const profilePicModal = document.querySelector("#profile__image-edit");
-const profilePicUrl = document.querySelector("#modal-input-url");
-const profileImage = document.querySelector(".profile__image");
-
-//Modal Queries
-const profileModalForm = profileEditModal.querySelector(".modal__form");
-const profileModalName = document.querySelector("#modal-input-name");
-const profileModalDescription = document.querySelector(
-  "#modal-input-description"
-);
-
-//Card Queries
-const addNewCardModal = document.querySelector("#add-new-card");
+import  { 
+  profileEditButton, addNewCardButton, profilePicButton, profilePicModal,
+  profileImage, profileModalForm, profileModalName, profileModalDescription, 
+  addNewCardModal, config } from "../utils/constants.js";
 
 //API EVENTS
 const api = new Api({
@@ -39,15 +21,6 @@ const api = new Api({
   },
 });
 
-//VALIDATION
-const config =  {
-  formSelector: ".modal__form",
-  inputSelector: ".modal__input",
-  submitButtonSelector: ".modal__button",
-  inactiveButtonClass: "modal__button_disabled",
-  inputErrorClass: "modal__input_type_error",
-  errorClass: "modal__error_visible",
-};
 //SECTION RENDERER
 const cardSection = new Section(
   {
@@ -200,8 +173,9 @@ const userInfo = new UserInfo(
 
 //EVENT LISTENERS
 profileEditButton.addEventListener("click", () => {
-  profileModalName.value = profileName.textContent;
-  profileModalDescription.value = profileDescription.textContent.trim();
+  const currentUser = userInfo.getUserInfo();
+  profileModalName.value = currentUser.name;
+  profileModalDescription.value = currentUser.title;
   editProfile.open();
 });
 
