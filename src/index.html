@@ -11,7 +11,6 @@
         <img
           class="header__image"
           src="<%=require('./images/logo.svg')%>"
-          ;
           alt="Around The U.S. Logo"
         />
       </header>
@@ -22,7 +21,7 @@
             src="<%=require('./images/Avatar.svg')%>"
             alt="Avatar"
           />
-
+          <button class="profile__image-button" type="button"></button>
           <div class="profile__info">
             <h1 class="profile__title" id="profile__name">Jacques Cousteau</h1>
             <button
@@ -45,6 +44,32 @@
       </footer>
     </div>
 
+    <!-- Edit Profile Pic -->
+    <div class="modal" id="profile__image-edit">
+      <div class="modal__container-profile">
+        <button class="modal__close" id="profile-modal-close"></button>
+        <p class="modal__heading-profile">Change profile picture</p>
+        <form class="modal__form">
+          <input
+            class="modal__input modal__input_type_name"
+            type="text"
+            name="url"
+            placeholder="Image Url"
+            id="modal-input-url"
+            required
+          />
+          <span class="modal__error" id="modal-input-url-error"></span>
+          <button
+            class="modal__button modal__button_disabled"
+            id="profile-save-button"
+            disabled
+          >
+            Save
+          </button>
+        </form>
+      </div>
+    </div>
+
     <!-- Edit Modal -->
     <div class="modal" id="profile-edit-modal">
       <div class="modal__container">
@@ -65,7 +90,7 @@
           <input
             class="modal__input modal__input_type_description"
             type="text"
-            name="description"
+            name="about"
             placeholder="Description"
             id="modal-input-description"
             minlength="2"
@@ -93,7 +118,7 @@
           <input
             class="modal__input modal__input_type_title"
             type="text"
-            name="title"
+            name="name"
             placeholder="Title"
             id="modal-input-title"
             minlength="1"
@@ -110,18 +135,14 @@
             required
           />
           <span class="modal__error" id="modal-Url-error"></span>
-          <button
-            class="modal__button"
-            type="submit"
-            id="new-card-submit"
-       
-          >
+          <button class="modal__button" type="submit" id="new-card-submit">
             Save
           </button>
         </form>
       </div>
     </div>
 
+    <!-- Preview Image -->
     <div class="modal" id="preview-image-modal">
       <div class="modal__preview">
         <button class="modal__close" type="button"></button>
@@ -130,6 +151,15 @@
       </div>
     </div>
 
+    <!-- Card Delete Prompt -->
+    <div class="modal" id="card__delete-modal">
+      <div class="modal__container-delete">
+        <button class="modal__close" id="card__delete-modal-close" type="button"></button>
+        <p class="modal__heading-delete">Are You Sure?</p>
+        <form class="modal__form" id="card__delete-form">
+          <button class="modal__button-delete">Yes</button>
+        </form>
+        
     <template id="card-template">
       <li class="card">
         <button class="card__button-delete" type="button"></button>

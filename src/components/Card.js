@@ -1,40 +1,46 @@
+
 export default class Card {
-  constructor(data, cardSelector, { handleImageClick }) {
+  constructor(data, cardSelector, { handleImageClick, handleDeleteClick, handleCardLike }) {
     this._name = data.name;
     this._link = data.link;
+    this.isLiked = data.isLiked;
+    this.id = data._id;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
+    this._handleDeleteClick = handleDeleteClick;
+    this._handleCardLike = handleCardLike;
   }
 
   _setEventListeners() {
     //".card__like-button"
-    this._cardElement
+     this._cardElement
       .querySelector(".card__like-button")
-      .addEventListener("click", () => this._handleLikeIcon());
-
-    //".card__delete-button"
+      .addEventListener("click", () => this._handleCardLike(this));    
     this._cardElement
       .querySelector(".card__button-delete")
-      .addEventListener("click", () => this._handleDeleteCard());
-
-    //get card image
-    // this._cardElement
-    //   .querySelector(".card__image")
-    //   .addEventListener("click", () => {
-    //     this._handleImageClick({
-    //       name: this._name,
-    //       link: this._link,
-    //     });
-    //   });
+      .addEventListener("click", () => this._handleDeleteClick(this));
   }
 
-  _handleLikeIcon() {
-    this._cardElement
-      .querySelector(".card__like-button")
-      .classList.toggle("card__like-button_active");
+  // _handleLikeIcon() {
+  //   this._cardElement
+  //     .querySelector(".card__like-button")
+  //     .classList.toggle("card__like-button_active");
+  // }
+
+  setLikeStatus(isLiked) {
+    this.isLiked = isLiked;
+    this._renderLikes();
   }
 
-  _handleDeleteCard() {
+  _renderLikes(){
+    if(this.isLiked) {
+      this._cardElement.querySelector(".card__like-button").classList.add("card__like-button_active");
+    } else {
+      this._cardElement.querySelector(".card__like-button").classList.remove("card__like-button_active");
+    }
+  }
+
+  removeCard() {
     this._cardElement.remove();
   }
 
@@ -50,7 +56,12 @@ export default class Card {
     //set event listeners
     this._cardImage.addEventListener("click", this._handleImageClick);
     this._setEventListeners();
+    this._renderLikes();
     // return the card
     return this._cardElement;
+  }
+
+  getId() {
+    return this.id;
   }
 }

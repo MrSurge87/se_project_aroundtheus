@@ -78,6 +78,31 @@
   margin-right: 24px;
 }
 
+.profile__image-button {
+  background: transparent url(../images/Edit\ Pencil.svg) center no-repeat;
+  position: fixed;
+  height: 26px;
+  width: 26px;
+  border: transparent;
+  visibility: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+img:hover + .profile__image-button, .profile__image-button:hover {
+  visibility: visible;
+  cursor: pointer;
+  background-color: rgba(0,0,0,0.8);
+  width: 120px;
+  height: 120px;
+}
+
+.profile__image:hover {
+  transition: linear 0.3s;
+  opacity: 0.6;
+  cursor: pointer;
+}
+
 @media screen and (max-width: 320px) {
   .profile {
     flex-direction: column;
